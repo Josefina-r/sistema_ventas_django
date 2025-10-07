@@ -29,11 +29,9 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 # Hosts allowed (set via env var, comma separated)
 
 
-ALLOWED_HOSTS = [
-    '.up.railway.app',  # dominio de Railway
-    'localhost',         # entorno local
-    '127.0.0.1',         # entorno local
-]
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+}
 
 
 
@@ -59,7 +57,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
+
+
 
 ROOT_URLCONF = 'sistema_ventas.urls'
 
