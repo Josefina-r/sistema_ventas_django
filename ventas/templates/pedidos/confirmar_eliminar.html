@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h3>Confirmar eliminación</h3>
+    <p>¿Estás seguro que deseas eliminar el pedido <strong>#{{ pedido.id }}</strong> de <strong>{{ pedido.cliente.nombre }}</strong>?</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+      <a href="{% url 'detalle_pedido' pedido.pk %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

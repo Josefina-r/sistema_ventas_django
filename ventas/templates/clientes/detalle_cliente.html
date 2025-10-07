@@ -1,0 +1,83 @@
+<!-- ventas/templates/clientes/detalle_cliente.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h3>Información del Cliente</h3>
+            </div>
+            <div class="card-body text-center">
+                {% if cliente.foto %}
+                    <img src="{{ cliente.foto.url }}" class="img-fluid rounded mb-3" alt="{{ cliente.nombre }}">
+                {% else %}
+                    <div class="bg-light rounded mb-3 p-5">
+                        <small>Sin foto</small>
+                    </div>
+                {% endif %}
+                <h4>{{ cliente.nombre }}</h4>
+                <p><strong>Email:</strong> {{ cliente.email }}</p>
+                <p><strong>Teléfono:</strong> {{ cliente.telefono }}</p>
+                <p><strong>Dirección:</strong> {{ cliente.direccion }}</p>
+                <p><strong>Registrado:</strong> {{ cliente.fecha_registro|date:"d/m/Y H:i" }}</p>
+                
+                <div class="mt-3">
+                    <a href="{% url 'editar_cliente' cliente.pk %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'eliminar_cliente' cliente.pk %}" class="btn btn-danger">Eliminar</a>
+                    <a href="{% url 'lista_clientes' %}" class="btn btn-secondary">Volver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3>Pedidos del Cliente</h3>
+                <a href="{% url 'crear_pedido' %}" class="btn btn-primary btn-sm">Nuevo Pedido</a>
+            </div>
+            <div class="card-body">
+                {% if pedidos %}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unit.</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for pedido in pedidos %}
+                            <tr>
+                                <td>{{ pedido.producto }}</td>
+                                <td>{{ pedido.cantidad }}</td>
+                                <td>${{ pedido.precio_unitario }}</td>
+                                <td>${{ pedido.total }}</td>
+                                <td>
+                                    <span class="badge 
+                                        {% if pedido.estado == 'COMPLETADO' %}bg-success
+                                        {% elif pedido.estado == 'EN_PROCESO' %}bg-warning
+                                        {% elif pedido.estado == 'CANCELADO' %}bg-danger
+                                        {% else %}bg-secondary{% endif %}">
+                                        {{ pedido.get_estado_display }}
+                                    </span>
+                                </td>
+                                <td>{{ pedido.fecha_pedido|date:"d/m/Y" }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="text-center">No hay pedidos para este cliente.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

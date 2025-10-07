@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="mb-4">Sistema de Gestión de Ventas</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <h5 class="card-title">Total Clientes</h5>
+                <h2 class="card-text">{{ total_clientes }}</h2>
+                <a href="{% url 'lista_clientes' %}" class="btn btn-light">Ver Clientes</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <h5 class="card-title">Total Pedidos</h5>
+                <h2 class="card-text">{{ total_pedidos }}</h2>
+                <a href="{% url 'lista_pedidos' %}" class="btn btn-light">Ver Pedidos</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-warning">
+            <div class="card-body">
+                <h5 class="card-title">Pedidos Pendientes</h5>
+                <h2 class="card-text">{{ pedidos_pendientes }}</h2>
+                <a href="{% url 'lista_pedidos' %}" class="btn btn-light">Ver Pedidos</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
