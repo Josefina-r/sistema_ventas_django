@@ -28,7 +28,13 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # Hosts allowed (set via env var, comma separated)
 
-ALLOWED_HOSTS = ['.up.railway.app', 'localhost', '127.0.0.1']
+
+ALLOWED_HOSTS = [
+    '.up.railway.app',  # dominio de Railway
+    'localhost',         # entorno local
+    '127.0.0.1',         # entorno local
+]
+
 
 
 
