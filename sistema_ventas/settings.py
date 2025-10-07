@@ -33,6 +33,7 @@ DATABASES = {
     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
 
+ALLOWED_HOSTS = ['web-production-b0d0.up.railway.app', 'localhost', '127.0.0.1']
 
 
 
