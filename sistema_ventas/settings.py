@@ -27,7 +27,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # Hosts allowed (set via env var, comma separated)
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
+
+ALLOWED_HOSTS = ['.up.railway.app', 'localhost', '127.0.0.1']
+
 
 
 # Application definition
